@@ -1,9 +1,10 @@
 SampleApp::Application.routes.draw do
   resources :users
-  resources :sessions, :only => [:new, :create, :distroy]
+  resources :sessions,   :only => [:new, :create, :destroy]
+  resources :microposts, :only => [:create, :destroy]
 
   root :to => 'pages#home'
-  
+
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'
   match '/signout' => 'sessions#destroy'
@@ -69,3 +70,4 @@ SampleApp::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+
