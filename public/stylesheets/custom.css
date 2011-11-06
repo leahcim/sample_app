@@ -190,40 +190,49 @@ ul.users {
   list-style: none;
 }
 
+/* Microposts feed */
+
 h1.micropost {
   margin-bottom: 0.3em;
 }
 
-/* remove blueprint's default zebra stripes */
-table tr:nth-child(even) td {
-  background: none;
+ol.microposts {
+  display: table;
+  padding: 0;
+  margin: 1em 0 1.4em;
 }
 
-table.microposts {
-  margin-top: 1em;
-}
-
-table.microposts tr {
+.microposts > li {
+  display: table-row;
   height: 70px;
 }
 
-table.microposts tr td.gravatar {
+.microposts > li > div,
+.microposts > li > a {
+  display: table-cell;
+  padding: 4px 10px 4px 5px;
+  vertical-align: middle;
+}
+
+.microposts > li > a.gravatar {
   border-top: 1px solid #ccc;
   vertical-align: top;
   width: 50px;
 }
 
-table.microposts tr td.micropost {
+.microposts > li > div.micropost {
   border-top: 1px solid #ccc;
   vertical-align: top;
   padding-top: 10px;
 }
 
-table.microposts tr td.micropost span.timestamp {
+/*.microposts > li > div.micropost > span*/.timestamp {
   display: block;
   font-size: 85%;
   color: #666;
 }
+
+/* User info pane */
 
 div.user_info img {
   padding-right: 0.1em;
@@ -241,6 +250,15 @@ div.user_info span.microposts {
   font-size: 80%;
 }
 
+p.counter {
+  font-size: 85%;
+  color: #666;
+  margin-bottom: 0.1em;
+  margin-top: -1em;
+}
+
+/* New micropost form */
+
 form.new_micropost {
   margin-bottom: 2em;
 }
@@ -248,13 +266,5 @@ form.new_micropost {
 form.new_micropost textarea {
   height: 4em;
   margin-bottom: 0;
-}
-
-p.counter {
-  display: block;
-  font-size: 85%;
-  color: #666;
-  margin-bottom: 0.1em;
-  margin-top: -1em;
 }
 

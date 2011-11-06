@@ -17,6 +17,7 @@ describe MicropostsController do
   end
 
   describe "POST 'create'" do
+
     before(:each) do
       @user = test_sign_in(Factory(:user))
     end
@@ -70,8 +71,8 @@ describe MicropostsController do
       before(:each) do
         @user = Factory(:user)
         @micropost = Factory(:micropost, :user => @user)
-        @wrong_user = Factory(:user, :email => Factory.next(:email))
-        test_sign_in(@wrong_user)
+        wrong_user = Factory(:user, :email => Factory.next(:email))
+        test_sign_in(wrong_user)
       end
 
       it "should deny access" do
