@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    # remember where to come back to in case a post gets deleted
+    store_location
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name

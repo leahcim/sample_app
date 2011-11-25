@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   def home
+    # remember where to come back to in case a post gets deleted
+    store_location
     @title = "Home"
     if signed_in?
       @micropost = Micropost.new

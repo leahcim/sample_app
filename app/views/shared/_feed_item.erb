@@ -5,14 +5,14 @@
     <span class="user">
       <%= link_to feed_item.user.name, feed_item.user %>
     </span>
-    <span class="content"><%= feed_item.content %></span>
+    <span class="content"><%= wrap(feed_item.content) %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </span>
   </div>
   <% if current_user?(feed_item.user) %>
   <%= link_to 'delete', feed_item, :method => :delete,
-                                   :confirmation => 'You sure?',
+                                   :confirm => 'You sure?',
                                    :title => feed_item.content %>
   <% end %>
 </li>

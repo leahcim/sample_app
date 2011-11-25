@@ -16,6 +16,38 @@ describe MicropostsController do
     end
   end
 
+  describe "GET 'index'" do
+
+    before(:each) do
+      @user = Factory(:user)
+    end
+
+    describe "for an existing user" do
+
+      it "should show the index page" do
+        get :index, :user_id => @user
+        response.should be_successful
+      end
+
+      it "should show all microposts" do
+        31.times { Factory(:micropost, :user => @user) }
+        get :index, :user_id => @user
+        @user.microposts.each do |micropost|
+          response.should have_selector('.micropost',
+                                        :content => micropost.content)
+        end
+      end
+    end
+
+    describe "for a non-existent user" do
+
+      it "should re-direct to the root path" do
+        get :index, :user_id => 'WRONG-ID'
+        response.should redirect_to root_path
+      end
+    end
+  end
+
   describe "POST 'create'" do
 
     before(:each) do
@@ -37,6 +69,22 @@ describe MicropostsController do
       it "should render the home page" do
         post :create, :micropost => @attr
         response.should render_template('pages/home')
+      end
+
+      describe "microposts feed" do
+
+        it "should list user's microposts" do
+          Factory(:micropost, :user => @user)
+          post :create, :micropost => @attr
+          response.should have_selector('.content')
+        end
+
+        it "should have pagination links pointing to the 'home' page" do
+          31.times { Factory(:micropost, :user => @user) }
+          post :create, :micropost => @attr
+          response.should have_selector('a', :href => '/?page=2',
+                                             :content => 'Next' )
+        end
       end
     end
 

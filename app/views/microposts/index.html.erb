@@ -1,0 +1,10 @@
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @title %>
+      </h1>
+      <% unless @microposts.empty? %>
+        <ol class="microposts">
+          <%= render @microposts %>
+        </ol>
+      <% end %>
+
