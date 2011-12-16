@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate,  :only => [ :index, :edit, :update, :destroy ]
+  before_filter :authenticate,  :except => [ :show, :new, :create ]
   before_filter :correct_user,  :only => [ :edit, :update ]
   before_filter :admin_user,    :only => :destroy
   before_filter :not_signed_in, :only => [ :new, :create ]
@@ -60,6 +60,20 @@ class UsersController < ApplicationController
       flash[:error] = "You can't delete yourself"
     end
     redirect_to(users_path)
+  end
+
+  def following
+    @title = 'Following'
+    @user = User.find_by_id(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
+    render :show_follow
+  end
+
+  def followers
+    @title = 'Followers'
+    @user = User.find_by_id(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+    render :show_follow
   end
 
   private

@@ -14,3 +14,8 @@ Factory.define :micropost do |micropost|
   micropost.content      'Foo bar'
   micropost.association  :user
 end
+
+Factory.define :relationship do |relationship|
+  relationship.association :follower, :factory => :user
+  relationship.association :followed, :factory => :user
+end
